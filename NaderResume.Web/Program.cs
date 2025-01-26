@@ -1,8 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using NaderResume.Data.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+var connection = builder.Configuration.GetConnectionString("ResumeConnection");
+builder.Services.AddDbContext<ResumeContextx>( options => options.UseSqlServer(connection));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
