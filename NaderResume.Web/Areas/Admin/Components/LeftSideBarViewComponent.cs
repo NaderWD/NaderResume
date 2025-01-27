@@ -2,17 +2,13 @@
 
 namespace NaderResume.Web.Areas.Admin.Components
 {
+    [ViewComponent]
     public class LeftSideBarViewComponent : ViewComponent
     {
-
-        #region Methods
-
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View("_LeftSideBar");
+            return View("LeftSideBar");
         }
-
-        #endregion
 
     }
 }
