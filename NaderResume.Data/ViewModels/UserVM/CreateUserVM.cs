@@ -1,6 +1,6 @@
 ﻿namespace NaderResume.Data.ViewModels.UserVM
 {
-    internal class CreateUserVM
+    public class CreateUserVM
     {
     }
 }
