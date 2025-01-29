@@ -35,7 +35,7 @@ namespace NaderResume.Data.ViewModels.UserVM
     {
         Success,
         Error,
-        UserNotFounf,
+        UserNotFound,
         EmailDuplicated,
         PhoneDuplicated,
     }

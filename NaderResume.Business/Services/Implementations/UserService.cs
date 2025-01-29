@@ -11,24 +11,25 @@ namespace NaderResume.Business.Services.Implementations
 
         public async Task<CreateUserResult> CreateUser(CreateUserVM createUser)
         {
-            CreateUserVM user = new CreateUserVM()
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            CreateUserVM user = new()
             {
                 FirstName = createUser.FirstName,
                 LastName = createUser.LastName,
-                Email = createUser.Email,
+                Email = createUser.Email.Trim().ToLower(),
                 Phone = createUser.Phone,
                 Password = createUser.Password,
                 Password2 = createUser.Password2,
             };
+
             await _repository.Insert(user);
             await _repository.Save();
             return CreateUserResult.Success;
         }
 
-        public Task DeleteUser(int id)
+        public void DeleteUser(int id)
         {
             _repository.Delete(id);
-            return Task.CompletedTask;
         }
 
         public async Task<List<User>> GetAllUsers()
@@ -58,7 +59,7 @@ namespace NaderResume.Business.Services.Implementations
         public async Task<UpdateUserResult> UpdateUser(UpdateUserVM updateUser)
         {
             var user = await _repository.GetById(updateUser.Id);
-            if (user == null) return UpdateUserResult.UserNotFounf;
+            if (user == null) return UpdateUserResult.UserNotFound;
 
 #pragma warning disable CS8604 // Possible null reference argument.
             if (await _repository.DuplicatedPhone(user.Id, updateUser.Phone))

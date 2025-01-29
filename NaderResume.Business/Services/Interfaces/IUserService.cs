@@ -10,6 +10,6 @@ namespace NaderResume.Business.Services.Interfaces
         Task<CreateUserResult> CreateUser(CreateUserVM createUser);
         Task<UpdateUserVM> GetForUpdateUser(int id);
         Task<UpdateUserResult> UpdateUser(UpdateUserVM updateUser);
-        Task DeleteUser(int id);
+        void DeleteUser(int id);
     }
 }

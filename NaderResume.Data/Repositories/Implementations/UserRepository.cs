@@ -12,6 +12,7 @@ namespace NaderResume.Data.Repositories.Implementations
         private readonly ResumeContext _context = context;
         private readonly IMapper _mapper = mapper;
 
+
         public void Delete(int Id)
         {
             _context.Remove(Id);

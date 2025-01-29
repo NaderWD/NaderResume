@@ -10,6 +10,7 @@ namespace NaderResume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> List()
         {
+            await _service.GetAllUsers();
             return View();
         }
 
@@ -23,6 +24,15 @@ namespace NaderResume.Web.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) return View(createUser);
 
+            var result = await _service.CreateUser(createUser);
+            switch ((result))
+            {
+                case CreateUserResult.Success:
+                    break;
+                case CreateUserResult.Error:
+                    break;
+            }
+
             return View();
         }
 
@@ -31,8 +41,6 @@ namespace NaderResume.Web.Areas.Admin.Controllers
             var user = await _service.GetUser(id);
             if (user == null) return NotFound();
 
-            //await _service.UpdateUser(user);
-
             return View();
         }
 
@@ -40,6 +48,22 @@ namespace NaderResume.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Update(UpdateUserVM updateUser)
         {
             if (!ModelState.IsValid) return View(updateUser);
+
+            var result = await _service.UpdateUser(updateUser);
+            switch ((result))
+
+            {
+                case UpdateUserResult.Success:
+                    break;
+                case UpdateUserResult.Error:
+                    break;
+                case UpdateUserResult.UserNotFound:
+                    break;
+                case UpdateUserResult.EmailDuplicated:
+                    break;
+                case UpdateUserResult.PhoneDuplicated:
+                    break;
+            }
 
             return View();
         }
