@@ -9,7 +9,6 @@ namespace NaderResume.Business.Services.Implementations
     {
         private readonly IUserRepository _repository = repository;
 
-
         public async Task<CreateUserResult> CreateUser(CreateUserVM createUser)
         {
             CreateUserVM user = new CreateUserVM()
@@ -42,10 +41,9 @@ namespace NaderResume.Business.Services.Implementations
             return await _repository.GetById(id);
         }
 
-        public async Task<UpdateUserVM> UpdateUser(int id)
+        public async Task<UpdateUserVM> GetForUpdateUser(int id)
         {
             var user = await _repository.GetById(id);
-
             if (user == null) return null;
 
             return new UpdateUserVM()
@@ -55,6 +53,30 @@ namespace NaderResume.Business.Services.Implementations
                 Email = user.Email,
                 Phone = user.Phone,
             };
+        }
+
+        public async Task<UpdateUserResult> UpdateUser(UpdateUserVM updateUser)
+        {
+            var user = await _repository.GetById(updateUser.Id);
+            if (user == null) return UpdateUserResult.UserNotFounf;
+
+#pragma warning disable CS8604 // Possible null reference argument.
+            if (await _repository.DuplicatedPhone(user.Id, updateUser.Phone))
+                return UpdateUserResult.PhoneDuplicated;
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            if (await _repository.DuplicatedEmail(user.Id, updateUser.Email.ToLower().Trim()))
+                return UpdateUserResult.EmailDuplicated;
+
+            user.FirstName = updateUser.FirstName;
+            user.LastName = updateUser.LastName;
+            user.Email = updateUser.Email;
+            user.Phone = updateUser.Phone;
+
+            _repository.Update(updateUser);
+            await _repository.Save();
+
+            return UpdateUserResult.Success;
         }
     }
 }

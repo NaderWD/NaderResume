@@ -6,7 +6,7 @@ namespace NaderResume.Web.Areas.Admin.Controllers
 {
     public class UserController(IUserService service) : Controller
     {
-        private readonly IUserService service = service;
+        private readonly IUserService _service = service;
 
         public async Task<IActionResult> List()
         {
@@ -28,6 +28,11 @@ namespace NaderResume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
+            var user = await _service.GetUser(id);
+            if (user == null) return NotFound();
+
+            //await _service.UpdateUser(user);
+
             return View();
         }
 

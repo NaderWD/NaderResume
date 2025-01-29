@@ -6,6 +6,8 @@ namespace NaderResume.Data.ViewModels.UserVM
 {
     public class UpdateUserVM
     {
+        public int Id { get; set; }
+
         [DisplayName("نام")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(150)]

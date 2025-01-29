@@ -11,7 +11,9 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 var connection = builder.Configuration.GetConnectionString("ResumeConnection");
 builder.Services.AddDbContext<ResumeContext>( options => options.UseSqlServer(connection));
 
+
 builder.Services.ServicesRegistration();
+builder.Services.MappingConfiguration();
 
 var app = builder.Build();
 
