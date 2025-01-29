@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 var connection = builder.Configuration.GetConnectionString("ResumeConnection");
-builder.Services.AddDbContext<ResumeContextx>( options => options.UseSqlServer(connection));
+builder.Services.AddDbContext<ResumeContext>( options => options.UseSqlServer(connection));
 
 builder.Services.ServicesRegistration();
 

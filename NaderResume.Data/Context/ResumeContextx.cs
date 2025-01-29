@@ -3,9 +3,9 @@ using NaderResume.Data.Models.Users;
 
 namespace NaderResume.Data.Context
 {
-    public class ResumeContextx : DbContext
+    public class ResumeContext : DbContext
     {
-        public ResumeContextx(DbContextOptions<ResumeContextx> option) : base(option)
+        public ResumeContext(DbContextOptions<ResumeContext> option) : base(option)
         {
 
         }

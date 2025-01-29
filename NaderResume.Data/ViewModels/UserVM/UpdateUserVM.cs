@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using NaderResume.Data.Models.Common;
 
 namespace NaderResume.Data.ViewModels.UserVM
 {
@@ -26,19 +27,14 @@ namespace NaderResume.Data.ViewModels.UserVM
         [DataType(DataType.PhoneNumber)]
         [MaxLength(15)]
         public string? Phone { get; set; }
+    }
 
-        [DisplayName("کلمه ی عبور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [DataType(DataType.Password)]
-        [MaxLength(100)]
-        public string? Password { get; set; }
-
-        [DisplayName("تکرار کلمه ی عبور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [DataType(DataType.Password)]
-        [Compare("Password")]
-        public string? Password2 { get; set; }
-
-        public bool IsActive { get; set; }
+    public enum UpdateUserResult
+    {
+        Success,
+        Error,
+        UserNotFounf,
+        EmailDuplicated,
+        PhoneDuplicated,
     }
 }
