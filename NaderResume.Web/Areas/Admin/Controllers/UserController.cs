@@ -8,7 +8,7 @@ namespace NaderResume.Web.Areas.Admin.Controllers
     {
         private readonly IUserService _service = service;
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(FilterUserVM filter)
         {
             await _service.GetAllUsers();
             return View();

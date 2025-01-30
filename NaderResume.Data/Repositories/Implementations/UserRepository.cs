@@ -54,5 +54,35 @@ namespace NaderResume.Data.Repositories.Implementations
         {
             return await _context.Users.AnyAsync(u => u.Phone == phone && u.Id != id);
         }
+
+        public async Task<FilterUserVM> Filter(FilterUserVM filter)
+        {
+            var query = _context.Users.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter.FirstName))
+            { query = query.Where(u => u.FirstName == filter.FirstName); }
+
+            if (!string.IsNullOrEmpty(filter.LastName))
+            { query = query.Where(u => u.LastName == filter.LastName); }
+
+            if (!string.IsNullOrEmpty(filter.Email))
+            { query = query.Where(u => u.Email == filter.Email); }
+
+            if (!string.IsNullOrEmpty(filter.Phone))
+            { query = query.Where(u => u.Phone == filter.Phone); }
+
+            await filter.Paging(query.Select(user => new DetailsUserVM()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.Phone,
+                CreateDate = DateTime.Now,
+                IsActive = user.IsActive,
+            }));
+
+            return filter;
+        }
     }
 }

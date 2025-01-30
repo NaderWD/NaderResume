@@ -6,7 +6,7 @@ namespace NaderResume.Data.Models.Common
     {
         [Key]
         public int Id { get; set; }
-        public DateTime CreateDate { get; set; }
-        public DateTime LastModifiedDate { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
     }
 }

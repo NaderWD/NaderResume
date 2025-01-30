@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using NaderResume.Data.Models.Common;
 
 namespace NaderResume.Data.ViewModels.UserVM
 {
-    public class DetailsUserVM
+    public class DetailsUserVM : BaseEntity
     {
         [DisplayName("نام")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
@@ -26,5 +27,7 @@ namespace NaderResume.Data.ViewModels.UserVM
         [DataType(DataType.PhoneNumber)]
         [MaxLength(15)]
         public string? Phone { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

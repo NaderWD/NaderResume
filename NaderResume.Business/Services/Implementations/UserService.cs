@@ -79,5 +79,10 @@ namespace NaderResume.Business.Services.Implementations
 
             return UpdateUserResult.Success;
         }
+
+        public async Task<FilterUserVM> Filter(FilterUserVM filter)
+        {
+            return await _repository.Filter(filter);
+        }
     }
 }

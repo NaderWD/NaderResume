@@ -11,6 +11,7 @@ namespace NaderResume.Data.Repositories.Interfaces
         void Update(UpdateUserVM model);
         Task<bool> DuplicatedEmail(int id, string email);
         Task<bool> DuplicatedPhone(int id, string phone);
+        Task<FilterUserVM> Filter(FilterUserVM filter);
         void Delete(int Id);
         Task Save();
     }
