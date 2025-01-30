@@ -10,8 +10,8 @@ namespace NaderResume.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> List(FilterUserVM filter)
         {
-            await _service.Filter(filter);
-            return View();
+            var result = await _service.Filter(filter);
+            return View(result);
         }
 
         public IActionResult Create()
