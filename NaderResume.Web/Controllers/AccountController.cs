@@ -11,6 +11,9 @@ namespace NaderResume.Web.Controllers
     {
         private readonly IUserService _service = service;
 
+
+        #region Login
+        [HttpGet("/login")]
         public IActionResult Login()
         {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -21,7 +24,8 @@ namespace NaderResume.Web.Controllers
             return View();
         }
 
-        [HttpPost]
+
+        [HttpPost("/login")]
         public async Task<IActionResult> Login(LoginVM model)
         {
             if (ModelState.IsValid) return View(model);
@@ -55,7 +59,19 @@ namespace NaderResume.Web.Controllers
                     return View(result);
             }
 
-            return View();
+            return View(result);
         }
+        #endregion
+
+
+
+        #region LogOut
+        [HttpGet("/logout")]
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+        #endregion
     }
 }
