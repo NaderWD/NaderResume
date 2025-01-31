@@ -45,7 +45,8 @@ namespace NaderResume.Business.Services.Implementations
 
         public async Task<User> GetUserByEmail(string email)
         {
-            return await _repository.GetByEmail(email);
+            var model = email.Trim().ToLower();
+            return await _repository.GetByEmail(model);
         }
 
         public async Task<UpdateUserVM> GetForUpdateUser(int id)
