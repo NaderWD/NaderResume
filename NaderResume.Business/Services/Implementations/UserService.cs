@@ -1,6 +1,7 @@
 ﻿using NaderResume.Business.Services.Interfaces;
 using NaderResume.Data.Models.Users;
 using NaderResume.Data.Repositories.Interfaces;
+using NaderResume.Data.ViewModels.AccountVM;
 using NaderResume.Data.ViewModels.UserVM;
 
 namespace NaderResume.Business.Services.Implementations
@@ -83,6 +84,20 @@ namespace NaderResume.Business.Services.Implementations
         public async Task<FilterUserVM> Filter(FilterUserVM filter)
         {
             return await _repository.Filter(filter);
+        }
+
+        public async Task<LoginResult> LoginUser(LoginVM model)
+        {
+            var email = model.Email.Trim().ToLower();
+            var user = await _repository.GetByEmail(email);
+
+            if (user == null) return LoginResult.UserNotFound;
+
+            string hashPassword = model.Password;
+            if (!string.IsNullOrEmpty(hashPassword)) return LoginResult.UserNotFound;
+            if (user.Password != hashPassword) return LoginResult.UserNotFound;
+
+            return LoginResult.Success;
         }
     }
 }

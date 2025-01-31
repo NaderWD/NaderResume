@@ -1,4 +1,5 @@
 ﻿using NaderResume.Data.Models.Users;
+using NaderResume.Data.ViewModels.AccountVM;
 using NaderResume.Data.ViewModels.UserVM;
 
 namespace NaderResume.Business.Services.Interfaces
@@ -11,6 +12,7 @@ namespace NaderResume.Business.Services.Interfaces
         Task<UpdateUserVM> GetForUpdateUser(int id);
         Task<UpdateUserResult> UpdateUser(UpdateUserVM updateUser);
         Task<FilterUserVM> Filter(FilterUserVM filter);
+        Task<LoginResult> LoginUser(LoginVM model);
         void DeleteUser(int id);
     }
 }

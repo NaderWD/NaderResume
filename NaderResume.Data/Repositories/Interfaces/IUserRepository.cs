@@ -7,6 +7,7 @@ namespace NaderResume.Data.Repositories.Interfaces
     {
         Task<List<User>> GetAll();
         Task<User> GetById(int id);
+        Task<User> GetByEmail(string email);
         Task Insert(CreateUserVM model);
         void Update(UpdateUserVM model);
         Task<bool> DuplicatedEmail(int id, string email);

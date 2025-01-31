@@ -23,6 +23,11 @@ namespace NaderResume.Data.Repositories.Implementations
             return await _context.Users.FirstOrDefaultAsync(u => u.Id == Id);
         }
 
+        public async Task<User> GetByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(e => e.Email == email);
+        }
+
         public async Task<List<User>> GetAll()
         {
             return await _context.Users.ToListAsync();
