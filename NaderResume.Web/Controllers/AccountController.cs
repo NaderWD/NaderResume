@@ -4,7 +4,7 @@ using NaderResume.Data.ViewModels.AccountVM;
 
 namespace NaderResume.Web.Controllers
 {
-    public class AccountController(IUserService service) : Controller
+    public class AccountController(IUserService service) : SiteBaseController
     {
         private readonly IUserService _service = service;
 
@@ -27,12 +27,17 @@ namespace NaderResume.Web.Controllers
             switch (result)
             {
                 case LoginResult.Success:
-                    break;
+                    TempData[SuccessMessage] = "ورود با موفقیت انجام شد";
+                    return View(result);
+
                 case LoginResult.Error:
-                    break;
+                    TempData[ErrorMessage] = "خطایی رخ داده است لططفا مجددا تلاش کنید";
+                    return View(result);
+
                 case LoginResult.UserNotFound:
-                    break;
-            }
+                    TempData[ErrorMessage]="کاربر یافت نشد";
+                    return View(result);
+            }        
 
             return View();
         }

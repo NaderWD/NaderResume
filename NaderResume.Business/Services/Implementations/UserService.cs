@@ -43,6 +43,11 @@ namespace NaderResume.Business.Services.Implementations
             return await _repository.GetById(id);
         }
 
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _repository.GetByEmail(email);
+        }
+
         public async Task<UpdateUserVM> GetForUpdateUser(int id)
         {
             var user = await _repository.GetById(id);

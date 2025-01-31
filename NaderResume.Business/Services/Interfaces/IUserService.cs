@@ -8,6 +8,7 @@ namespace NaderResume.Business.Services.Interfaces
     {
         Task<List<User>> GetAllUsers();
         Task<User> GetUser(int id);
+        Task<User> GetUserByEmail(string email);
         Task<CreateUserResult> CreateUser(CreateUserVM createUser);
         Task<UpdateUserVM> GetForUpdateUser(int id);
         Task<UpdateUserResult> UpdateUser(UpdateUserVM updateUser);
