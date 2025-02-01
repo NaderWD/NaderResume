@@ -26,7 +26,6 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.ServicesRegistration();
-builder.Services.MappingConfiguration();
 
 var app = builder.Build();
 

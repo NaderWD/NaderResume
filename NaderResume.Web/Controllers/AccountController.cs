@@ -67,7 +67,7 @@ namespace NaderResume.Web.Controllers
 
         #region LogOut
         [HttpGet("/logout")]
-        public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync();
             return RedirectToAction("Index", "Home");

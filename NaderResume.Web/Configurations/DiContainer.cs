@@ -4,6 +4,7 @@ using NaderResume.Business.Services.Interfaces;
 using NaderResume.Data.Profiles;
 using NaderResume.Data.Repositories.Implementations;
 using NaderResume.Data.Repositories.Interfaces;
+using System.Reflection;
 
 namespace NaderResume.Web.Configurations
 {
@@ -13,12 +14,8 @@ namespace NaderResume.Web.Configurations
         {
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
-        }
 
-        public static void MappingConfiguration(this IServiceCollection services)
-        {
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfiles>());
-            IMapper mapper = config.CreateMapper();
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
     }
 }
